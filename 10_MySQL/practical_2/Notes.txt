@@ -1,0 +1,47 @@
+CREATE TABLE student(
+roll_no INT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+city VARCHAR(30) ,
+marks INT
+);
+
+INSERT INTO student(roll_no, name, city, marks)
+values 
+(110, "adam","Delhi",76),
+(108, "bob", "Mumbai", 65),
+(124, "casey", "Pune", 94),
+(112, "duke", "Pune",80);
+
+-- select all student who score 75+
+select * from student where marks >= 75; 
+
+-- Find names of all cities where students are from
+select DISTINCT(city) from student; 
+
+-- Find the maximum marks of students from each city
+select city, max(marks) from student group by city; 
+
+-- Find the average of the class
+select avg(marks) from student;
+
+-- Add a new column grade, assign grade such that :
+-- marks > 80, grade = 'O'
+-- marks 70-80, grade = 'A'
+-- marks 60-70, grade = 'B'
+
+ALTER TABLE student
+ADD COLUMN grade varchar(1);
+
+UPDATE student 
+SET grade = 'O'
+WHERE marks >= 80;
+
+UPDATE student 
+SET grade = 'A'
+WHERE marks <= 80 AND marks >= 70;
+
+UPDATE student 
+SET grade = 'B'
+WHERE marks <= 70 AND marks >= 60;
+
+select * from student;
